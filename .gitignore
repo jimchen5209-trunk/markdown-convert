@@ -125,3 +125,8 @@ dist
 .yarn/unplugged
 .yarn/build-state.yml
 .pnp.*
+
+# project
+*.md
+*.html
+*.pdf
