@@ -128,5 +128,6 @@ dist
 
 # project
 *.md
+!README.md
 *.html
 *.pdf
