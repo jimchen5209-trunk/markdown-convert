@@ -29,7 +29,7 @@ const main = () => {
         }
 
         // framework
-        const md = new markdownIt();
+        const md = new markdownIt({html: true});
         
         const files = process.argv.slice(3);
 
