@@ -3,8 +3,12 @@ import markdownIt from 'markdown-it';
 import { readFileSync, writeFileSync } from 'fs';
 import { join, parse } from 'path';
 
-const readMdFile = (file: string):string => {
+const readFile = (file: string):string => {
     return readFileSync(file, 'utf8');
+}
+
+const readTemplateFile = (): string => {
+    return readFile('template/template.html')
 }
 
 const main = () => {
@@ -30,10 +34,12 @@ const main = () => {
         const files = process.argv.slice(3);
 
         files.forEach(file => {
-            const mdString = readMdFile(file);
+            const mdString = readFile(file);
 
             // render to html
-            const htmlString = md.render(mdString);
+            const htmlString = readTemplateFile()
+                .replace("{markdownFile}", `${parse(file).name}${parse(file).ext}`)
+                .replace("{body}", md.render(mdString));
 
             switch (process.argv[2]) {
                 case 'html':
