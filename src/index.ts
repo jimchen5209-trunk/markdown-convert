@@ -1,4 +1,4 @@
-import pdf, { CreateOptions } from 'html-pdf';
+import pdf from 'html-pdf-node-ts';
 import markdownIt from 'markdown-it';
 import { readFileSync, writeFileSync } from 'fs';
 import { join, parse } from 'path';
@@ -47,10 +47,9 @@ const main = () => {
                     console.log(`File exported to ${join(parse(file).dir, `${parse(file).name}.html`) }`);
                     break;
                 case 'pdf':
-                    const options = { format: "A4" } as CreateOptions;
-                    pdf.create(htmlString, options).toFile(join(parse(file).dir, `${parse(file).name}.pdf`), function (err, res) {
-                        if (err) return console.log(err);
-                        console.log(`File exported to ${res.filename}`);
+                    pdf.generatePdf({ content: htmlString }, { format: "A4" }).then(buffer => {
+                        writeFileSync(join(parse(file).dir, `${parse(file).name}.pdf`), buffer);
+                        console.log(`File exported to ${join(parse(file).dir, `${parse(file).name}.pdf`)}`);
                     });
                     break;
             }
