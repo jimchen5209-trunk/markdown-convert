@@ -41,7 +41,7 @@ const main = () => {
                     console.log(`File exported to ${join(parse(file).dir, `${parse(file).name}.html`) }`);
                     break;
                 case 'pdf':
-                    const options = { format: "Letter" } as CreateOptions;
+                    const options = { format: "A4" } as CreateOptions;
                     pdf.create(htmlString, options).toFile(join(parse(file).dir, `${parse(file).name}.pdf`), function (err, res) {
                         if (err) return console.log(err);
                         console.log(`File exported to ${res.filename}`);
