@@ -1,7 +1,7 @@
 # markdown-convert
 
 一個將 markdown 檔案轉成 html 或 pdf 格式的小程式  
-註：pdf 將以 A4 大小輸出  
+註：pdf 轉檔需使用含圖形介面的環境， 將以 A4 大小輸出  
 
 ## 開發環境
 
