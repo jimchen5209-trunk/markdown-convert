@@ -20,9 +20,9 @@ yarn build:prod
 ```
 ### 指令說明
 ```bash
-yarn start <html|pdf> <file1> <file2>...
+yarn start <html|pdf|both> <file1> <file2>...
 ```
-- **&lt;html|pdf&gt;** - 選擇要轉成 html 或 pdf  
+- **&lt;html|pdf|both&gt;** - 選擇要轉成 html 或 pdf，或是輸入 both 同時轉成 html 和 pdf  
 - **&lt;file1&gt; &lt;file2&gt;** - 輸入檔案，可同時輸入多檔案，以空格隔開  
 - 輸出檔會放在與輸入檔案同一個路徑，並以原始檔名命名
 

@@ -14,17 +14,17 @@ const readTemplateFile = (): string => {
 const main = () => {
     if (process.argv.length > 2)
     {
-        if (process.argv[2] != "html" && process.argv[2] != "pdf")
+        if (process.argv[2] != "html" && process.argv[2] != "pdf" && process.argv[2] != "both")
         {
             console.log(`Invalid option ${process.argv[2]}.`);
-            console.log('Usage: <html|pdf> <file1> ...');
+            console.log('Usage: <html|pdf|both> <file1> ...');
             process.exit(1);
         }
 
         if (process.argv.length < 4) 
         {
             console.log('No input file.');
-            console.log('Usage: <html|pdf> <file1> ...');
+            console.log('Usage: <html|pdf|both> <file1> ...');
             process.exit(1);
         }
 
@@ -47,6 +47,14 @@ const main = () => {
                 .replace("{body}", md.render(mdString));
 
             switch (process.argv[2]) {
+                case 'both':
+                    writeFileSync(join(parse(file).dir, `${parse(file).name}.html`), htmlString);
+                    console.log(`File exported to ${join(parse(file).dir, `${parse(file).name}.html`)}`);
+                    pdf.generatePdf({ content: htmlString }, { format: "A4" }).then(buffer => {
+                        writeFileSync(join(parse(file).dir, `${parse(file).name}.pdf`), buffer);
+                        console.log(`File exported to ${join(parse(file).dir, `${parse(file).name}.pdf`)}`);
+                    });
+                    break;
                 case 'html':
                     writeFileSync(join(parse(file).dir, `${parse(file).name}.html`), htmlString);
                     console.log(`File exported to ${join(parse(file).dir, `${parse(file).name}.html`) }`);
@@ -60,7 +68,7 @@ const main = () => {
             }
         })
     } else {
-        console.log('Usage: <html|pdf> <file1> ...');
+        console.log('Usage: <html|pdf|both> <file1> ...');
         process.exit(1);
     }
 }
