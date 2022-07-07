@@ -34,6 +34,11 @@ const main = () => {
         const files = process.argv.slice(3);
 
         files.forEach(file => {
+            if (parse(file).ext !== '.md') {
+                console.error(`Could not read ${parse(file).name}${parse(file).ext}: Only accepts .md files`);
+                return;
+            }
+
             const mdString = readFile(file);
 
             // render to html
